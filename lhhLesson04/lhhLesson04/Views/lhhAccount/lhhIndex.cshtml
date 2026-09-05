@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "lhhIndex";
+}
+
+<div class="row">
+    @foreach (var item in ViewBag.Accounts)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+
+                    <img src="@item.AcountAvatar"
+                         alt="@item.AcountName"
+                         class="img-fluid"
+                         style="width: 200px; height: 200px; object-fit: cover;" />
+
+                    <div class="caption">
+                        <h5 class="card-title">
+                            @item.AcountName
+                        </h5>
+
+                        <p class="card-text">
+                            Email: @item.AccountEmail
+                        </p>
+
+                        <p class="card-text">
+                            Phone: @item.AcountPhone
+                        </p>
+
+                        <p>
+                            <a asp-controller="lhhAccount"
+                               asp-action="lhhProfile"
+                               
+                               class="btn btn-success">
+                                Profile
+                            </a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<style>
+    /* ===== Account Card ===== */
+
+    .account-card {
+        border: none;
+        border-radius: 18px;
+        overflow: hidden;
+        background: #ffffff;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+        .account-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        /* Card body */
+        .account-card .card-body {
+            padding: 25px;
+            text-align: center;
+        }
+
+    /* Avatar */
+    .account-avatar {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 5px solid #f1f5f9;
+        padding: 3px;
+        transition: all 0.3s ease;
+    }
+
+    .account-card:hover .account-avatar {
+        border-color: #198754;
+        transform: scale(1.05);
+    }
+
+    /* Account name */
+    .account-card .card-title {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 22px;
+        font-weight: 700;
+        color: #212529;
+    }
+
+    /* Information */
+    .account-info {
+        color: #6c757d;
+        font-size: 15px;
+        margin-bottom: 8px;
+    }
+
+    /* Profile button */
+    .profile-btn {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 10px 28px;
+        border-radius: 30px;
+        background: linear-gradient(135deg, #198754, #20c997);
+        color: white !important;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .profile-btn:hover {
+            background: linear-gradient(135deg, #157347, #198754);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(25, 135, 84, 0.3);
+        }
+
+    /* Khoảng cách giữa các card */
+    .account-list {
+        margin-top: 30px;
+    }
+
+    /* Responsive */
+
+        .account-card .card-title {
+            font-size: 19px;
+        }
+    }
+
+</style>

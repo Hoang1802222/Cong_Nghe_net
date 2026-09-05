@@ -1,0 +1,215 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+    var account = ViewBag.Account;
+}
+
+<div class="container profile-container">
+    <div class="profile-card">
+
+        <!-- Avatar -->
+        <div class="profile-avatar-wrapper">
+            <img src="@account.AcountAvatar"
+                 alt="@account.AcountName"
+                 class="profile-avatar" />
+        </div>
+
+        <!-- Name -->
+        <h2 class="profile-name">
+            @account.AcountName
+        </h2>
+
+        <p class="profile-bio">
+            @account.AcountBio
+        </p>
+
+        <hr />
+
+        <!-- Information -->
+        <div class="profile-info">
+
+            <div class="info-item">
+                <span class="info-label">📧 Email</span>
+                <span class="info-value">
+                    @account.AccountEmail
+                </span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">📱 Phone</span>
+                <span class="info-value">
+                    @account.AcountPhone
+                </span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">📍 Address</span>
+                <span class="info-value">
+                    @account.AcountAddress
+                </span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">⚧ Gender</span>
+                <span class="info-value">
+                    @(account.Gender == 0 ? "Male" : "Female")
+                </span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">🎂 Birthday</span>
+                <span class="info-value">
+                    @account.AcountBirthday.ToString("dd/MM/yyyy")
+                </span>
+            </div>
+
+        </div>
+
+        <!-- Button -->
+        <div class="profile-actions">
+            <a asp-controller="lhhAccount"
+               asp-action="lhhIndex"
+               class="btn-back">
+                ← Back to Accounts
+            </a>
+        </div>
+
+    </div>
+</div>
+<style>
+    /* =========================
+       PROFILE PAGE
+    ========================= */
+
+    .profile-container {
+        min-height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 15px;
+    }
+
+    .profile-card {
+        width: 100%;
+        max-width: 650px;
+        background: #fff;
+        border-radius: 25px;
+        padding: 40px;
+        text-align: center;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        transition: all 0.3s ease;
+    }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.16);
+        }
+
+    /* Avatar */
+
+    .profile-avatar-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .profile-avatar {
+        width: 180px;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 6px solid #fff;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Name */
+
+    .profile-name {
+        font-size: 30px;
+        font-weight: 700;
+        color: #212529;
+        margin-bottom: 10px;
+    }
+
+    /* Bio */
+
+    .profile-bio {
+        color: #6c757d;
+        font-size: 16px;
+        font-style: italic;
+        margin-bottom: 25px;
+    }
+
+    /* Info */
+
+    .profile-info {
+        text-align: left;
+        margin-top: 25px;
+    }
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5px;
+        border-bottom: 1px solid #eee;
+        gap: 20px;
+    }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+    .info-label {
+        font-weight: 600;
+        color: #495057;
+        min-width: 120px;
+    }
+
+    .info-value {
+        color: #6c757d;
+        text-align: right;
+        word-break: break-word;
+    }
+
+    /* Button */
+
+    .profile-actions {
+        margin-top: 30px;
+    }
+
+    .btn-back {
+        display: inline-block;
+        padding: 11px 25px;
+        border-radius: 30px;
+        background: linear-gradient(135deg, #198754, #20c997);
+        color: white !important;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(25, 135, 84, 0.3);
+        }
+        .profile-avatar {
+            width: 140px;
+            height: 140px;
+        }
+
+        .profile-name {
+            font-size: 24px;
+        }
+
+        .info-item {
+            display: block;
+        }
+
+        .info-value {
+            display: block;
+            margin-top: 5px;
+            text-align: left;
+        }
+    }
+
+</style>
