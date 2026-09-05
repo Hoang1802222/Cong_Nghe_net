@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\baitap\\CongNgheNet\\lhhLesson3\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5FEE1248-8CD1-47A6-BFFC-75E0FA480DAA}|lhhLesson3\\lhhLesson3.csproj|c:\\baitap\\congnghenet\\lhhlesson3\\lhhlesson3\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5FEE1248-8CD1-47A6-BFFC-75E0FA480DAA}|lhhLesson3\\lhhLesson3.csproj|solutionrelative:lhhlesson3\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5FEE1248-8CD1-47A6-BFFC-75E0FA480DAA}|lhhLesson3\\lhhLesson3.csproj|c:\\baitap\\congnghenet\\lhhlesson3\\lhhlesson3\\views\\lhhproduct\\lhhgetlistproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5FEE1248-8CD1-47A6-BFFC-75E0FA480DAA}|lhhLesson3\\lhhLesson3.csproj|solutionrelative:lhhlesson3\\views\\lhhproduct\\lhhgetlistproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5FEE1248-8CD1-47A6-BFFC-75E0FA480DAA}|lhhLesson3\\lhhLesson3.csproj|c:\\baitap\\congnghenet\\lhhlesson3\\lhhlesson3\\views\\lhhproduct\\lhhgetallproducts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5FEE1248-8CD1-47A6-BFFC-75E0FA480DAA}|lhhLesson3\\lhhLesson3.csproj|solutionrelative:lhhlesson3\\views\\lhhproduct\\lhhgetallproducts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5FEE1248-8CD1-47A6-BFFC-75E0FA480DAA}|lhhLesson3\\lhhLesson3.csproj|c:\\baitap\\congnghenet\\lhhlesson3\\lhhlesson3\\controllers\\lhhproductcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5FEE1248-8CD1-47A6-BFFC-75E0FA480DAA}|lhhLesson3\\lhhLesson3.csproj|solutionrelative:lhhlesson3\\controllers\\lhhproductcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5FEE1248-8CD1-47A6-BFFC-75E0FA480DAA}|lhhLesson3\\lhhLesson3.csproj|c:\\baitap\\congnghenet\\lhhlesson3\\lhhlesson3\\models\\lhhproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5FEE1248-8CD1-47A6-BFFC-75E0FA480DAA}|lhhLesson3\\lhhLesson3.csproj|solutionrelative:lhhlesson3\\models\\lhhproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\baitap\\CongNgheNet\\lhhLesson3\\lhhLesson3\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "lhhLesson3\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\baitap\\CongNgheNet\\lhhLesson3\\lhhLesson3\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "lhhLesson3\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACAAAAB/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-28T01:32:00.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "lhhGetListProduct.cshtml",
+              "DocumentMoniker": "C:\\baitap\\CongNgheNet\\lhhLesson3\\lhhLesson3\\Views\\lhhProduct\\lhhGetListProduct.cshtml",
+              "RelativeDocumentMoniker": "lhhLesson3\\Views\\lhhProduct\\lhhGetListProduct.cshtml",
+              "ToolTip": "C:\\baitap\\CongNgheNet\\lhhLesson3\\lhhLesson3\\Views\\lhhProduct\\lhhGetListProduct.cshtml",
+              "RelativeToolTip": "lhhLesson3\\Views\\lhhProduct\\lhhGetListProduct.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-28T01:24:18.142Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "lhhGetAllProducts.cshtml",
+              "DocumentMoniker": "C:\\baitap\\CongNgheNet\\lhhLesson3\\lhhLesson3\\Views\\lhhProduct\\lhhGetAllProducts.cshtml",
+              "RelativeDocumentMoniker": "lhhLesson3\\Views\\lhhProduct\\lhhGetAllProducts.cshtml",
+              "ToolTip": "C:\\baitap\\CongNgheNet\\lhhLesson3\\lhhLesson3\\Views\\lhhProduct\\lhhGetAllProducts.cshtml",
+              "RelativeToolTip": "lhhLesson3\\Views\\lhhProduct\\lhhGetAllProducts.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-28T01:22:24.082Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "lhhProductController.cs",
+              "DocumentMoniker": "C:\\baitap\\CongNgheNet\\lhhLesson3\\lhhLesson3\\Controllers\\lhhProductController.cs",
+              "RelativeDocumentMoniker": "lhhLesson3\\Controllers\\lhhProductController.cs",
+              "ToolTip": "C:\\baitap\\CongNgheNet\\lhhLesson3\\lhhLesson3\\Controllers\\lhhProductController.cs",
+              "RelativeToolTip": "lhhLesson3\\Controllers\\lhhProductController.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAAwFYAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T00:47:22.552Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "lhhProduct.cs",
+              "DocumentMoniker": "C:\\baitap\\CongNgheNet\\lhhLesson3\\lhhLesson3\\Models\\lhhProduct.cs",
+              "RelativeDocumentMoniker": "lhhLesson3\\Models\\lhhProduct.cs",
+              "ToolTip": "C:\\baitap\\CongNgheNet\\lhhLesson3\\lhhLesson3\\Models\\lhhProduct.cs",
+              "RelativeToolTip": "lhhLesson3\\Models\\lhhProduct.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T00:45:33.247Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Danh sach san pham";
+    var products = ViewData["Products"] as List<lhhLesson3.Models.lhhProduct>;
+    int stt = 0;
+}
+<div class="card">
+    <div class="card-header"><h1>@ViewData["Title"]</h1></div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ProductId</th>
+                    <th>ProductName</th>
+                    <th>Price</th>
+                    <th>YearRelease</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (lhhProduct item in products)
+                {
+                    stt++;
+                    <tr>
+                        <td>@stt</td>
+                        <td>@item.lhhProductID</td>
+                        <td>@item.lhhProductName</td>
+                        <td>@item.lhhPrice</td>
+                        <td>@item.lhhYearRelease</td>
+                        <td>
+                            <a href="@Url.Action("Edit", new { id = item.lhhProductID })" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="@Url.Action("Delete", new { id = item.lhhProductID })" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6" class="text-center">
+                        Tổng số sản phẩm: @products.Count
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>

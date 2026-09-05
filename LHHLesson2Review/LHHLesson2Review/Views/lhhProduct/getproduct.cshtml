@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Du lieu san pham";
+}
+@{
+    lhhProduct product = ViewData["product"] as LHHLesson2Review.Models.lhhProduct;
+}
+<div class="alert alert-danger" role="alert">
+
+
+
+    <h2>Du lieu lay tu viewdata </h2>
+    <p>Ma san pham: @product.productID      </p>
+    <p>Ten san pham: @product.productName</p>
+    <p>Year Release: @product.YearRelease</p>
+    <p>Price: @product.price</p>
+</div>
+<div class="alert alert-info" role="alert">
+    <h2>Du lieu lay tu viewbag </h2>
+    <p>Ma san pham: @ViewBag.product.productID      </p>
+    <p>Ten san pham: @ViewBag.product.productName</p>
+    <p>Year Release: @ViewBag.product.YearRelease</p>
+    <p>Price: @ViewBag.product.price</p>
+</div>
