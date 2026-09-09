@@ -1,0 +1,49 @@
+﻿@model IEnumerable<lhhLesson06ne.Models.Category>
+
+<div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+
+    <!-- Tiêu đề -->
+    <div class="card-header text-white border-0"
+         style="background: linear-gradient(135deg, #667eea, #764ba2);">
+        <h5 class="mb-0 py-2">
+            <i class="bi bi-grid-fill me-2"></i>
+            Danh mục
+        </h5>
+    </div>
+
+    <!-- Danh sách -->
+    <div class="list-group list-group-flush">
+
+        @foreach (var category in Model)
+        {
+            <a href="#"
+               class="list-group-item list-group-item-action py-3 category-item">
+
+                <div class="d-flex align-items-center">
+
+                    <!-- Icon -->
+                    <div class="category-icon me-3">
+                        <i class="bi bi-box-seam"></i>
+                    </div>
+
+                    <!-- Nội dung -->
+                    <div>
+                        <div class="fw-bold text-dark">
+                            @category.Name
+                        </div>
+
+                        <small class="text-muted">
+                            @category.Description
+                        </small>
+                    </div>
+
+                    <!-- Mũi tên -->
+                    <i class="bi bi-chevron-right ms-auto text-secondary"></i>
+
+                </div>
+
+            </a>
+        }
+
+    </div>
+</div>
