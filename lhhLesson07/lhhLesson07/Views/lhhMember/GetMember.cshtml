@@ -1,0 +1,15 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Thong tin cua Member";
+    var member = Model as lhhLesson07.Models.DataModel.lhhMember;
+}
+<div class="alert alert-info" role="alert">
+    <h1 class="alert-heading">@ViewData["Title"]</h1>
+    <p>ID: @member.lhhMemberId</p>
+    <p>Ten dang nhap: @member.lhhUserName</p>
+    <p>Password: @member.lhhPassword</p>
+    <p>Email: @member.lhhEmail</p>
+    <p>Ho ten: @member.lhhFullName</p>
+</div>

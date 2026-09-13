@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Danh sach thanh vien";
+    int i = 0;
+}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Danh sách thành viên</h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#No.</th>
+                    <th>ID</th>
+                    <th>Tên đăng nhập</th>
+                    <th>Email</th>
+                    <th>Họ tên</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var member in ViewBag.Members)
+                {
+                    i++;
+                    <tr>
+                        <td>@i</td> 
+                        <td>@member.lhhMemberId</td>
+                        <td>@member.lhhUserName</td>
+                        <td>@member.lhhEmail</td>
+                        <td>@member.lhhFullName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+ </div>
