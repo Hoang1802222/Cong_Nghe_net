@@ -1,0 +1,100 @@
+```cshtml
+@model lhhLesson08.Models.lhhMember
+
+@{
+    ViewData["Title"] = "Thông tin thành viên";
+}
+
+<div class="container mt-4">
+
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <div class="card shadow border-0">
+
+                <!-- Header -->
+                <div class="card-header bg-info text-white text-center py-3">
+                    <h3 class="mb-0">
+                        <i class="bi bi-person-circle"></i>
+                        Thông tin thành viên
+                    </h3>
+                </div>
+
+                <!-- Nội dung -->
+                <div class="card-body p-4">
+
+                    <dl class="row mb-0">
+
+                        <!-- Họ tên -->
+                        <dt class="col-sm-4 mb-3">
+                            <i class="bi bi-person"></i>
+                            Họ và tên
+                        </dt>
+
+                        <dd class="col-sm-8 mb-3 fw-semibold">
+                            @Html.DisplayFor(model => model.lhhMemberName)
+                        </dd>
+
+                        <!-- Email -->
+                        <dt class="col-sm-4 mb-3">
+                            <i class="bi bi-envelope"></i>
+                            Email
+                        </dt>
+
+                        <dd class="col-sm-8 mb-3">
+                            @Html.DisplayFor(model => model.lhhMemberEmail)
+                        </dd>
+
+                        <!-- Mật khẩu -->
+                        <dt class="col-sm-4 mb-3">
+                            <i class="bi bi-lock"></i>
+                            Mật khẩu
+                        </dt>
+
+                        <dd class="col-sm-8 mb-3">
+                            <span class="badge bg-secondary">
+                                @Html.DisplayFor(model => model.lhhMemberPassword)
+                            </span>
+                        </dd>
+
+                        <!-- Số điện thoại -->
+                        <dt class="col-sm-4 mb-3">
+                            <i class="bi bi-telephone"></i>
+                            Số điện thoại
+                        </dt>
+
+                        <dd class="col-sm-8 mb-3">
+                            @Html.DisplayFor(model => model.lhhMemberPhone)
+                        </dd>
+
+                    </dl>
+
+                    <hr />
+
+                    <!-- Buttons -->
+                    <div class="d-flex gap-2">
+
+                        <a asp-action="lhhEdit"
+                           asp-route-id="@Model?.lhhMemberID"
+                           class="btn btn-warning flex-fill">
+                            <i class="bi bi-pencil-square"></i>
+                            Chỉnh sửa
+                        </a>
+
+                        <a asp-action="Index"
+                           class="btn btn-secondary flex-fill">
+                            <i class="bi bi-arrow-left"></i>
+                            Trở về danh sách
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+```

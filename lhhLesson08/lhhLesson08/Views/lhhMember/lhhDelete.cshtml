@@ -1,0 +1,112 @@
+```cshtml
+@model lhhLesson08.Models.lhhMember
+
+@{
+    ViewData["Title"] = "Xóa thành viên";
+}
+
+<div class="container mt-4">
+
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <div class="card shadow border-0">
+
+                <!-- Header -->
+                <div class="card-header bg-danger text-white text-center py-3">
+                    <h3 class="mb-0">
+                        <i class="bi bi-trash-fill"></i>
+                        Xóa thành viên
+                    </h3>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <!-- Cảnh báo -->
+                    <div class="alert alert-warning text-center">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <strong>Bạn có chắc chắn muốn xóa thành viên này?</strong>
+                        <br />
+                        <small>Thao tác này không thể hoàn tác.</small>
+                    </div>
+
+                    <!-- Thông tin thành viên -->
+                    <dl class="row">
+
+                        <dt class="col-sm-4 mb-3">
+                            <i class="bi bi-person"></i>
+                            Họ và tên
+                        </dt>
+
+                        <dd class="col-sm-8 mb-3 fw-semibold">
+                            @Html.DisplayFor(model => model.lhhMemberName)
+                        </dd>
+
+
+                        <dt class="col-sm-4 mb-3">
+                            <i class="bi bi-envelope"></i>
+                            Email
+                        </dt>
+
+                        <dd class="col-sm-8 mb-3">
+                            @Html.DisplayFor(model => model.lhhMemberEmail)
+                        </dd>
+
+
+                        <dt class="col-sm-4 mb-3">
+                            <i class="bi bi-lock"></i>
+                            Mật khẩu
+                        </dt>
+
+                        <dd class="col-sm-8 mb-3">
+                            <span class="badge bg-secondary">
+                                @Html.DisplayFor(model => model.lhhMemberPassword)
+                            </span>
+                        </dd>
+
+
+                        <dt class="col-sm-4 mb-3">
+                            <i class="bi bi-telephone"></i>
+                            Số điện thoại
+                        </dt>
+
+                        <dd class="col-sm-8 mb-3">
+                            @Html.DisplayFor(model => model.lhhMemberPhone)
+                        </dd>
+
+                    </dl>
+
+                    <hr />
+
+                    <!-- Nút -->
+                    <form asp-action="lhhDeleteConfirmed">
+
+                        <input type="hidden" name="id" value="@Model.lhhMemberID" />
+
+                        <div class="d-flex gap-2">
+
+                            <button type="submit"
+                                    class="btn btn-danger flex-fill">
+                                <i class="bi bi-trash-fill"></i>
+                                Xác nhận xóa
+                            </button>
+
+                            <a asp-action="Index"
+                               class="btn btn-secondary flex-fill">
+                                <i class="bi bi-arrow-left"></i>
+                                Hủy
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+```

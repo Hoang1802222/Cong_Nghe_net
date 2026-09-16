@@ -1,0 +1,49 @@
+@model lhhLesson08.Models.lhhMember
+
+@{
+    ViewData["Title"] = "Chỉnh sửa thông tin";
+}
+
+<h1>Chỉnh sửa thông tin</h1>
+
+<h4>lhhMember</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="lhhEdit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="lhhMemberID" />
+            <div class="form-group">
+                <label asp-for="lhhMemberName" class="control-label"></label>
+                <input asp-for="lhhMemberName" class="form-control" />
+                <span asp-validation-for="lhhMemberName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="lhhMemberEmail" class="control-label"></label>
+                <input asp-for="lhhMemberEmail" class="form-control" />
+                <span asp-validation-for="lhhMemberEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="lhhMemberPassword" class="control-label"></label>
+                <input asp-for="lhhMemberPassword" class="form-control" />
+                <span asp-validation-for="lhhMemberPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="lhhMemberPhone" class="control-label"></label>
+                <input asp-for="lhhMemberPhone" class="form-control" />
+                <span asp-validation-for="lhhMemberPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
