@@ -1,0 +1,65 @@
+@model lhhLesson09.Models.DataviewModel.lhhMemberRegister
+
+@{
+    ViewData["Title"] = "Thêm mới thành viên";
+}
+
+<div class="container mt-4">
+    <h2>Thêm mới thành viên</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="lhhMemberName" class="control-label fw-bold"></label>
+                    <input asp-for="lhhMemberName" class="form-control" placeholder="Nhập tên đăng nhập..." />
+                    <span asp-validation-for="lhhMemberName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="lhhMemberPassword" class="control-label fw-bold"></label>
+                    <input asp-for="lhhMemberPassword" type="password" class="form-control" placeholder="Nhập mật khẩu..." />
+                    <span asp-validation-for="lhhMemberPassword" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="lhhMemberEmail" class="control-label fw-bold"></label>
+                    <input asp-for="lhhMemberEmail" type="email" class="form-control" placeholder="nhambaitap@example.com" />
+                    <span asp-validation-for="lhhMemberEmail" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="lhhMemberPhone" class="control-label fw-bold"></label>
+                    <input asp-for="lhhMemberPhone" class="form-control" placeholder="Nhập số điện thoại..." />
+                    <span asp-validation-for="lhhMemberPhone" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="lhhFullname" class="control-label fw-bold"></label>
+                    <input asp-for="lhhFullname" class="form-control" placeholder="Nhập họ và tên..." />
+                    <span asp-validation-for="lhhFullname" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="lhhBirtday" class="control-label fw-bold"></label>
+                    <input asp-for="lhhBirtday" type="date" class="form-control" />
+                    <span asp-validation-for="lhhBirtday" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary">Thêm mới</button>
+                    <a asp-action="Index" class="btn btn-secondary ms-2">Quay lại danh sách</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
