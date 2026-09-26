@@ -1,0 +1,119 @@
+@model lhh_2410900036_exam.Models.LhhEmploye
+
+@{
+    ViewData["Title"] = "Chỉnh sửa nhân viên";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+            <!-- Header Card -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h2 class="h3 mb-0 text-gray-800 fw-bold">
+                        <i class="bi bi-pencil-square text-warning me-2"></i>Cập nhật thông tin
+                    </h2>
+                    <p class="text-muted small mb-0">Chỉnh sửa chi tiết thông tin nhân viên #@Model?.Id</p>
+                </div>
+                <a asp-action="Index" class="btn btn-outline-secondary rounded-pill px-3 shadow-sm">
+                    <i class="bi bi-arrow-left me-1"></i>Quay lại
+                </a>
+            </div>
+
+            <!-- Form Card -->
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-body p-4">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3" role="alert"></div>
+
+                        <!-- ID ẩn -->
+                        <input type="hidden" asp-for="Id" />
+
+                        <!-- Họ và tên -->
+                        <div class="mb-3">
+                            <label asp-for="LhhName" class="form-label fw-semibold">
+                                <i class="bi bi-person me-1 text-primary"></i>Họ và tên
+                            </label>
+                            <input asp-for="LhhName" class="form-control" placeholder="Nhập đầy đủ họ và tên..." />
+                            <span asp-validation-for="LhhName" class="text-danger small ms-1"></span>
+                        </div>
+
+                        <div class="row">
+                            <!-- Giới tính -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="LhhGender" class="form-label fw-semibold">
+                                    <i class="bi bi-gender-ambiguous me-1 text-primary"></i>Giới tính
+                                </label>
+                                <select asp-for="LhhGender" class="form-select">
+                                    <option value="">-- Chọn giới tính --</option>
+                                    <option value="true">Nam</option>
+                                    <option value="false">Nữ</option>
+                                </select>
+                                <span asp-validation-for="LhhGender" class="text-danger small ms-1"></span>
+                            </div>
+
+                            <!-- Ngày sinh -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="LhhBirthDay" class="form-label fw-semibold">
+                                    <i class="bi bi-calendar-event me-1 text-primary"></i>Ngày sinh
+                                </label>
+                                <input asp-for="LhhBirthDay" type="date" class="form-control" />
+                                <span asp-validation-for="LhhBirthDay" class="text-danger small ms-1"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Email -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="LhhEmail" class="form-label fw-semibold">
+                                    <i class="bi bi-envelope me-1 text-primary"></i>Email
+                                </label>
+                                <input asp-for="LhhEmail" type="email" class="form-control" placeholder="example@domain.com" />
+                                <span asp-validation-for="LhhEmail" class="text-danger small ms-1"></span>
+                            </div>
+
+                            <!-- Số điện thoại -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="LhhPhone" class="form-label fw-semibold">
+                                    <i class="bi bi-telephone me-1 text-primary"></i>Số điện thoại
+                                </label>
+                                <input asp-for="LhhPhone" type="tel" class="form-control" placeholder="0912..." />
+                                <span asp-validation-for="LhhPhone" class="text-danger small ms-1"></span>
+                            </div>
+                        </div>
+
+                        <!-- Trạng thái Active -->
+                        <div class="mb-4">
+                            <div class="form-check form-switch card p-3 bg-light border-0">
+                                <div class="d-flex align-items-center">
+                                    <input asp-for="LhhActive" class="form-check-input ms-0 me-3" type="checkbox" role="switch" id="flexSwitchActive" />
+                                    <div>
+                                        <label class="form-check-label fw-semibold text-dark" for="flexSwitchActive">
+                                            Kích hoạt tài khoản (Active)
+                                        </label>
+                                        <div class="text-muted small">Bật/tắt trạng thái hoạt động của nhân viên này</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="LhhActive" class="text-danger small"></span>
+                        </div>
+
+                        <hr class="my-4 text-muted">
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-end gap-2">
+                            <a asp-action="Index" class="btn btn-light border px-4 rounded-pill">Hủy bỏ</a>
+                            <button type="submit" class="btn btn-warning text-dark px-4 rounded-pill shadow-sm fw-semibold">
+                                <i class="bi bi-save me-1"></i>Lưu thay đổi
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
