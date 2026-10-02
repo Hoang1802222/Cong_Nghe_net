@@ -1,0 +1,70 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "About";
+    Layout = "~/Views/Shared/_lhhLayout.cshtml";
+}
+<div class="alert-info">
+    <h1>Thong tin sinh vien ne</h1>
+    <p>ho va ten: Le Huy Hoang</p>
+    <p>MSV: 2410900036</p>
+    <p>Nganh: CNTT</p>
+    <p>Lop: K24CNT2</p>
+    <p>SDT: 0866018947</p>
+    <p>Email: lehuyhoang@example.com</p>
+</div>
+<style>
+/* Styling cho khối thông tin sinh viên */
+.alert-info {
+    background: #ffffff;
+    border-left: 6px solid #2563eb; /* Thanh màu xanh làm điểm nhấn bên trái */
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    max-width: 480px;
+    margin: 2rem auto;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+    /* Hiệu ứng nhấc nhẹ khi di chuột vào card */
+    .alert-info:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Tiêu đề card */
+    .alert-info h1 {
+        color: #1e293b;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid #e2e8f0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    /* Các dòng thông tin chi tiết */
+    .alert-info p {
+        color: #475569;
+        font-size: 1rem;
+        line-height: 1.8;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+
+        .alert-info p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Đổi định dạng nhãn (phần tên thuộc tính trước dấu hai chấm) */
+        .alert-info p strong {
+            color: #0f172a;
+            font-weight: 600;
+            width: 110px; /* Căn thẳng hàng các mục */
+            display: inline-block;
+}</style>

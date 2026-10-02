@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a asp-action="Index" asp-controller="Products" title="danh sach san pham">danh sach san pham</a></li>
+            <li><a asp-action="Search" asp-controller="Products">tim kiem san pham</a></li>
+            <li><a asp-action="Hots" asp-controller="Products">san pham ban chay</a></li>
+            <li><a asp-action="about" asp-controller="Products">Gioi thieu</a></li>
+
+        </ul>
+    </nav>
+    <div>
+        @RenderBody()
+    </div>
+    <footer>
+        <p style="text-align: center;">&copy; 2026 - lhhLesson13</p></br>
+        <a asp-action="privacy" asp-controller="Home">Privacy</a>
+    </footer>
+</body>
+</html>
+<style>
+    /* Reset căn bản & Font chữ */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f8f9fa;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    /* Thanh Navigation Header */
+    header {
+        background-color: #1e293b;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    nav li {
+        margin: 0;
+    }
+
+    nav a {
+        display: block;
+        padding: 1rem 1.5rem;
+        color: black;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+        nav a:hover {
+            background-color: #2563eb;
+            color: #ffffff;
+        }
+
+    /* Phần nội dung chính (Main Content) */
+    main {
+        flex: 1;
+        max-width: 1200px;
+        width: 100%;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+    }
+
+    /* Chân trang Footer */
+    footer {
+        background-color: #0f172a;
+        color: #94a3b8;
+        text-align: center;
+        padding: 1.5rem 1rem;
+        margin-top: auto;
+    }
+
+        footer a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+            footer a:hover {
+                text-decoration: underline;
+            }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+</style>
