@@ -1,0 +1,184 @@
+@model IEnumerable<lhhLesson14.Models.Category>
+@using models = lhhLesson14.Models
+
+@{
+    ViewData["Title"] = "Danh sách danh mục";
+}
+
+<div class="category-container">
+    <div class="page-header">
+        <h1 class="page-title">Quản lý Danh mục</h1>
+        <a asp-action="Create" class="btn-create">
+            <i class="bi bi-plus-lg"></i> Tạo mới
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table custom-table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th class="text-end">Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model) 
+            {
+                <tr>
+                    <td class="fw-semibold">
+                        @Html.DisplayFor(model => item.Name)
+                    </td>
+                    <td>
+                        <div class="action-group">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn-action btn-edit">Sửa</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn-action btn-details">Chi tiết</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn-action btn-delete">Xóa</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="2" class="text-center text-muted py-4">
+                    Chưa có danh mục nào trong hệ thống.
+                </td>
+            </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+</div>
+<style>
+    /* Container tổng quan */
+.category-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 28px 32px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    margin-top: 20px;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Tiêu đề & Thanh công cụ */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #f1f3f5;
+}
+
+.page-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #212529;
+    margin: 0;
+}
+
+/* Nút Create New */
+.btn-create {
+    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+    color: #ffffff !important;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
+    transition: all 0.2s ease;
+}
+
+.btn-create:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(13, 110, 253, 0.35);
+}
+
+/* Bảng dữ liệu */
+.custom-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.custom-table thead th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    padding: 14px 16px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.custom-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.custom-table td {
+    padding: 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid #edf2f7;
+    color: #333333;
+    font-size: 0.95rem;
+}
+
+/* Nút hành động (Edit, Details, Delete) */
+.action-group {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.btn-action {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+}
+
+.btn-edit {
+    background-color: #eef2ff;
+    color: #4f46e5;
+}
+
+.btn-edit:hover {
+    background-color: #4f46e5;
+    color: #ffffff;
+}
+
+.btn-details {
+    background-color: #e0f2fe;
+    color: #0369a1;
+}
+
+.btn-details:hover {
+    background-color: #0369a1;
+    color: #ffffff;
+}
+
+.btn-delete {
+    background-color: #fef2f2;
+    color: #dc2626;
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+    color: #ffffff;
+}
+</style>
