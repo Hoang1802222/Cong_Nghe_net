@@ -1,0 +1,140 @@
+﻿@model HTTGundamShop.Models.Order
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml"; // 👈 SỬA ĐƯỜNG DẪN LAYOUT TẠI ĐÂY
+    ViewData["Title"] = "Chi Tiết Đơn Hàng #" + Model?.OrderId;
+}
+
+@if (Model == null)
+{
+    <div class="alert alert-danger fw-bold">Không tìm thấy thông tin đơn hàng này!</div>
+}
+else
+{
+    <div class="container-fluid px-0">
+        <!-- Top Bar -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h3 class="fw-bold text-dark mb-1">Chi Tiết Đơn Hàng #@Model.OrderId</h3>
+                <span class="text-muted small">
+                    Ngày đặt: @(Model.OrderDate.HasValue ? Model.OrderDate.Value.ToString("dd/MM/yyyy HH:mm") : "N/A")
+                </span>
+            </div>
+            <a href="/Admin/AdminOrder" class="btn btn-outline-secondary fw-bold px-3">
+                <i class="bi bi-arrow-left me-1"></i> Quay lại danh sách
+            </a>
+        </div>
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show fw-bold mb-4" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i>@TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <div class="row g-4">
+            <!-- Cột trái: Thông tin khách hàng & Trạng thái -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-3 mb-4">
+                    <div class="card-header bg-dark text-white fw-bold py-3">
+                        <i class="bi bi-person-lines-fill me-2"></i>Thông Tin Giao Hàng
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-2"><strong>Tài khoản:</strong> @(Model.User?.UserName ?? "Khách vãng lai")</p>
+                        <p class="mb-2"><strong>Email:</strong> @(Model.User?.Email ?? "Chưa có email")</p>
+                        <p class="mb-2"><strong>Địa chỉ nhận:</strong> @Model.ShippingAddress</p>
+                        <hr />
+                        <p class="mb-0 fs-5 text-danger fw-bold">
+                            Tổng cộng: @Model.TotalAmount.ToString("N0") VNĐ
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm rounded-3">
+                    <div class="card-header bg-primary text-white fw-bold py-3">
+                        <i class="bi bi-gear-fill me-2"></i>Cập Nhật Trạng Thái
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="UpdateStatus" method="post">
+                            <input type="hidden" name="id" value="@Model.OrderId" />
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Trạng thái hiện tại:</label>
+                                <select name="status" class="form-select fw-bold">
+                                    <option value="Chờ xử lý" selected="@(Model.OrderStatus == "Chờ xử lý")">Chờ xử lý</option>
+                                    <option value="Đang giao" selected="@(Model.OrderStatus == "Đang giao")">Đang giao</option>
+                                    <option value="Đã hoàn thành" selected="@(Model.OrderStatus == "Đã hoàn thành")">Đã hoàn thành</option>
+                                    <option value="Đã hủy" selected="@(Model.OrderStatus == "Đã hủy")">Đã hủy</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100 fw-bold py-2">
+                                <i class="bi bi-floppy me-1"></i> Lưu Cập Nhật
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột phải: Sản phẩm đã mua -->
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-3">
+                    <div class="card-header bg-light fw-bold py-3">
+                        <i class="bi bi-box-seam me-2 text-primary"></i>Danh Sách Sản Phẩm Mua (@(Model.OrderDetails?.Count ?? 0))
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table align-middle mb-0">
+                                <thead class="table-light border-bottom">
+                                    <tr class="text-secondary small text-uppercase">
+                                        <th class="ps-4 py-3">Mô hình</th>
+                                        <th class="py-3 text-center">Đơn giá</th>
+                                        <th class="py-3 text-center">Số lượng</th>
+                                        <th class="py-3 text-end pe-4">Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.OrderDetails != null && Model.OrderDetails.Any())
+                                    {
+                                        @foreach (var detail in Model.OrderDetails)
+                                        {
+                                            var subtotal = detail.UnitPrice * detail.Quantity;
+                                            <tr>
+                                                <td class="ps-4 py-3">
+                                                    <div class="d-flex align-items-center">
+                                                        @if (!string.IsNullOrEmpty(detail.Product?.ImageUrl))
+                                                        {
+                                                            <img src="@detail.Product.ImageUrl" alt="@detail.Product.ProductName" class="rounded border me-3" style="width: 50px; height: 50px; object-fit: cover;" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="bg-light rounded border d-flex align-items-center justify-content-center text-muted me-3" style="width: 50px; height: 50px;">
+                                                                <i class="bi bi-image"></i>
+                                                            </div>
+                                                        }
+                                                        <div>
+                                                            <div class="fw-bold text-dark">@(detail.Product?.ProductName ?? "Sản phẩm không tồn tại")</div>
+                                                            <small class="text-muted">Mã SP: #@detail.ProductId</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center py-3">@detail.UnitPrice.ToString("N0") VNĐ</td>
+                                                <td class="text-center py-3 fw-bold">x @detail.Quantity</td>
+                                                <td class="text-end pe-4 py-3 text-danger fw-bold">@subtotal.ToString("N0") VNĐ</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="4" class="text-center py-4 text-muted">Không có chi tiết sản phẩm nào.</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

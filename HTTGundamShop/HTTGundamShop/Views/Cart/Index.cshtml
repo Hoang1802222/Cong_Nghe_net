@@ -1,0 +1,104 @@
+﻿@model IEnumerable<HTTGundamShop.ViewModels.CartItemViewModel>
+
+@{
+    ViewData["Title"] = "Giỏ Hàng - HTT SHOP";
+    decimal grandTotal = Model?.Sum(item => item.Total) ?? 0;
+}
+
+<div class="container my-5">
+    <h2 class="fw-bold text-uppercase text-primary mb-4">
+        <i class="bi bi-cart3"></i> Giỏ Hàng Của Bạn
+    </h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center py-5 shadow-sm">
+            <h4 class="alert-heading">Giỏ hàng của bạn đang trống!</h4>
+            <p class="mb-3">Hãy chọn thêm mô hình Gundam yêu thích vào giỏ hàng nhé.</p>
+            <a asp-controller="Product" asp-action="Index" class="btn btn-primary fw-bold">
+                Khám phá sản phẩm ngay
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <!-- Bảng danh sách sản phẩm trong giỏ -->
+            <div class="col-lg-8 mb-4">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 45%;">Sản phẩm</th>
+                                        <th style="width: 15%;">Đơn giá</th>
+                                        <th style="width: 20%;">Số lượng</th>
+                                        <th style="width: 15%;">Thành tiền</th>
+                                        <th style="width: 5%;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "/images/no-image.png" : item.ImageUrl)"
+                                                         alt="@item.ProductName"
+                                                         class="img-thumbnail me-3"
+                                                         style="width: 60px; height: 60px; object-fit: contain;" />
+                                                    <div>
+                                                        <a asp-controller="Product" asp-action="Details" asp-route-id="@item.ProductId" class="fw-bold text-dark text-decoration-none">
+                                                            @item.ProductName
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fw-semibold">@item.Price.ToString("N0") VNĐ</td>
+                                            <td>
+                                                <form asp-action="UpdateQuantity" method="post" class="d-flex align-items-center">
+                                                    <input type="hidden" name="cartItemId" value="@item.CartItemId" />
+                                                    <input type="number" name="quantity" value="@item.Quantity" min="1"
+                                                           class="form-control form-control-sm text-center me-2"
+                                                           style="width: 65px;" onchange="this.form.submit()" />
+                                                </form>
+                                            </td>
+                                            <td class="fw-bold text-danger">@item.Total.ToString("N0") VNĐ</td>
+                                            <td>
+                                                <a asp-action="Remove" asp-route-id="@item.CartItemId" class="btn btn-sm btn-outline-danger" title="Xóa">
+                                                    &times;
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột Tổng tiền & Thanh toán -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm border-0 bg-light">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold border-bottom pb-2">Tóm Tắt Đơn Hàng</h5>
+                        <div class="d-flex justify-content-between my-3">
+                            <span>Tổng số lượng:</span>
+                            <span class="fw-bold">@Model.Sum(i => i.Quantity) sản phẩm</span>
+                        </div>
+                        <div class="d-flex justify-content-between my-3 fs-5">
+                            <span class="fw-bold">Tổng tiền:</span>
+                            <span class="fw-bold text-danger">@grandTotal.ToString("N0") VNĐ</span>
+                        </div>
+                        <hr />
+                        <a asp-controller="Order" asp-action="Checkout" class="btn btn-success btn-lg w-100 fw-bold">
+                            Tiến Hành Thanh Toán
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

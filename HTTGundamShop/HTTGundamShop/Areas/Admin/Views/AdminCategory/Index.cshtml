@@ -1,0 +1,88 @@
+﻿@model IEnumerable<HTTGundamShop.Models.Category>
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Quản Lý Danh Mục";
+}
+
+<div class="container-fluid px-0">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold text-dark mb-1">
+                <i class="bi bi-tags me-2 text-primary"></i>Quản Lý Danh Mục
+            </h3>
+            <p class="text-muted small mb-0">Quản lý các cấp độ/dòng mô hình Gundam (HG, RG, MG, PG...)</p>
+        </div>
+        <a href="/Admin/AdminCategory/Create" class="btn btn-primary fw-bold px-3">
+            <i class="bi bi-plus-lg me-1"></i>Thêm Danh Mục Mới
+        </a>
+    </div>
+
+    <!-- Thông báo thành công/thất bại -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show fw-bold mb-4" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>@TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show fw-bold mb-4" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>@TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Bảng Danh mục -->
+    <div class="card border-0 shadow-sm rounded-3">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light border-bottom">
+                        <tr class="text-secondary small text-uppercase">
+                            <th class="ps-4 py-3">Mã DM</th>
+                            <th class="py-3">Tên danh mục</th>
+                            <th class="py-3 text-center">Số sản phẩm</th>
+                            <th class="py-3 text-center pe-4">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="ps-4 py-3 fw-bold text-primary">#@item.CategoryId</td>
+                                    <td class="py-3">
+                                        <div class="fw-bold text-dark fs-6">@item.CategoryName</div>
+                                    </td>
+                                    <td class="text-center py-3">
+                                        <span class="badge bg-primary-subtle text-primary fw-bold px-3 py-2 fs-6">
+                                            @(item.Products?.Count ?? 0) mẫu
+                                        </span>
+                                    </td>
+                                    <td class="text-center pe-4 py-3">
+                                        <a href="/Admin/AdminCategory/Edit/@item.CategoryId" class="btn btn-sm btn-outline-warning fw-bold me-1">
+                                            <i class="bi bi-pencil-square me-1"></i>Sửa
+                                        </a>
+                                        <a href="/Admin/AdminCategory/Delete/@item.CategoryId" class="btn btn-sm btn-outline-danger fw-bold">
+                                            <i class="bi bi-trash me-1"></i>Xóa
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4" class="text-center py-5 text-muted">Chưa có danh mục nào.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

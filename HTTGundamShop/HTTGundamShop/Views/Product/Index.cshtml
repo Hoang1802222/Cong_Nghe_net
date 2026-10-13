@@ -1,0 +1,145 @@
+﻿@model IEnumerable<HTTGundamShop.Models.Product>
+
+@{
+    ViewData["Title"] = "Cửa Hàng Mô Hình Gundam";
+    var categories = ViewBag.Categories as List<HTTGundamShop.Models.Category>;
+    int? currentCatId = ViewBag.CurrentCategoryId as int?;
+    string searchKw = ViewBag.SearchKeyword as string;
+    string currentSort = ViewBag.CurrentSort as string;
+}
+
+<div class="container my-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Sản phẩm Gundam</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+        <!-- Cột Trái: Sidebar Bộ Lọc -->
+        <div class="col-lg-3">
+            <div class="card border-0 shadow-sm rounded-3 p-3 bg-white">
+                <h5 class="fw-bold text-dark mb-3">
+                    <i class="bi bi-funnel text-primary me-2"></i>Bộ Lọc Sản Phẩm
+                </h5>
+
+                <!-- Lọc Danh mục -->
+                <div class="mb-4">
+                    <h6 class="fw-bold text-secondary mb-2 small text-uppercase">Dòng Mô Hình (Grade)</h6>
+                    <div class="list-group list-group-flush">
+                        <a href="/Product" class="list-group-item list-group-item-action px-2 py-2 border-0 rounded mb-1 @(currentCatId == null ? "active fw-bold" : "")">
+                            Tất cả sản phẩm
+                        </a>
+                        @if (categories != null)
+                        {
+                            @foreach (var cat in categories)
+                            {
+                                <a href="/Product?categoryId=@cat.CategoryId" class="list-group-item list-group-item-action px-2 py-2 border-0 rounded mb-1 @(currentCatId == cat.CategoryId ? "active fw-bold" : "")">
+                                    @cat.CategoryName
+                                </a>
+                            }
+                        }
+                    </div>
+                </div>
+
+                <!-- Đặt lại bộ lọc -->
+                @if (currentCatId != null || !string.IsNullOrEmpty(searchKw))
+                {
+                    <a href="/Product" class="btn btn-outline-danger btn-sm fw-bold w-100">
+                        <i class="bi bi-x-circle me-1"></i>Xóa tất cả bộ lọc
+                    </a>
+                }
+            </div>
+        </div>
+
+        <!-- Cột Phải: Danh sách sản phẩm -->
+        <div class="col-lg-9">
+            <!-- Thanh Công cụ Tìm kiếm / Sắp xếp -->
+            <div class="card border-0 shadow-sm rounded-3 p-3 mb-4 bg-white">
+                <div class="row align-items-center g-3">
+                    <div class="col-md-6">
+                        <h5 class="fw-bold text-dark mb-0">
+                            @if (!string.IsNullOrEmpty(searchKw))
+                            {
+                                <span>Kết quả cho: "<span class="text-primary">@searchKw</span>"</span>
+                            }
+                            else
+                            {
+                                <span>Danh Sách Mô Hình (@Model.Count())</span>
+                            }
+                        </h5>
+                    </div>
+
+                    <!-- Dropdown Sắp xếp -->
+                    <div class="col-md-6 d-flex justify-content-md-end align-items-center gap-2">
+                        <label class="small text-muted fw-bold text-nowrap">Sắp xếp:</label>
+                        <select class="form-select form-select-sm" style="width: auto;" onchange="location = this.value;">
+                            <option value="/Product?categoryId=@currentCatId&search=@searchKw&sortBy=default" selected="@(currentSort == "default" || string.IsNullOrEmpty(currentSort))">Mới nhất</option>
+                            <option value="/Product?categoryId=@currentCatId&search=@searchKw&sortBy=price_asc" selected="@(currentSort == "price_asc")">Giá: Thấp đến Cao</option>
+                            <option value="/Product?categoryId=@currentCatId&search=@searchKw&sortBy=price_desc" selected="@(currentSort == "price_desc")">Giá: Cao đến Thấp</option>
+                            <option value="/Product?categoryId=@currentCatId&search=@searchKw&sortBy=name_asc" selected="@(currentSort == "name_asc")">Tên: A - Z</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid Danh sách sản phẩm -->
+            <div class="row g-3">
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-4 col-sm-6">
+                            <div class="card h-100 border-0 shadow-sm rounded-3 card-product">
+                                <div class="position-relative overflow-hidden rounded-top" style="height: 200px; background-color: #f8f9fa;">
+                                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                    {
+                                        <img src="@item.ImageUrl" class="card-img-top w-100 h-100 object-fit-cover" alt="@item.ProductName" />
+                                    }
+                                    else
+                                    {
+                                        <div class="d-flex align-items-center justify-content-center h-100 text-muted">
+                                            <i class="bi bi-image fs-1"></i>
+                                        </div>
+                                    }
+                                    <span class="position-absolute top-0 start-0 bg-primary text-white small fw-bold px-2 py-1 m-2 rounded">
+                                        @(item.Category?.CategoryName ?? "Gundam")
+                                    </span>
+                                </div>
+
+                                <div class="card-body d-flex flex-column p-3">
+                                    <h6 class="card-title fw-bold text-dark text-truncate mb-2" title="@item.ProductName">
+                                        @item.ProductName
+                                    </h6>
+                                    <div class="mt-auto">
+                                        <div class="fs-5 fw-bold text-danger mb-3">
+                                            @item.Price.ToString("N0") VNĐ
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a href="/Product/Details/@item.ProductId" class="btn btn-sm btn-outline-primary fw-bold">
+                                                <i class="bi bi-eye me-1"></i>Xem Chi Tiết
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-12 py-5 text-center">
+                        <div class="bg-white p-5 rounded-3 shadow-sm border">
+                            <i class="bi bi-search fs-1 text-muted d-block mb-3"></i>
+                            <h5 class="fw-bold text-secondary">Không tìm thấy sản phẩm phù hợp</h5>
+                            <p class="text-muted small mb-3">Thử tìm kiếm với từ khóa khác hoặc bỏ các bộ lọc.</p>
+                            <a href="/Product" class="btn btn-primary btn-sm fw-bold px-4">Xem tất cả sản phẩm</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

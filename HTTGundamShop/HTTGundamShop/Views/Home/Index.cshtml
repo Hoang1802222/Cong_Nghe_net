@@ -1,0 +1,334 @@
+﻿@{
+    ViewData["Title"] = "HAKUDA Style - HTT Shop Gundam";
+    var categories = ViewBag.Categories as List<HTTGundamShop.Models.Category>;
+    var newArrivals = ViewBag.NewArrivals as List<HTTGundamShop.Models.Product>;
+    var featuredProducts = ViewBag.FeaturedProducts as List<HTTGundamShop.Models.Product>;
+}
+
+<!-- Style Tùy Chỉnh Phong Cách Hakuda -->
+<style>
+    :root {
+        --hakuda-red: #e63946;
+        --hakuda-dark: #0f172a;
+        --hakuda-blue: #0284c7;
+        --hakuda-gray: #f8fafc;
+    }
+
+    /* Hero Banner Slider */
+    .hero-carousel .carousel-item {
+        height: 480px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+    .hero-overlay {
+        background: linear-gradient(90deg, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.4) 60%, rgba(0,0,0,0) 100%);
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Category Pill Badge */
+    .category-badge-item {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        transition: all 0.25s ease;
+    }
+    .category-badge-item:hover {
+        border-color: var(--hakuda-red);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(230, 57, 70, 0.12) !important;
+    }
+
+    /* Product Card Hakuda Style */
+    .hakuda-card {
+        border: 1px solid #edf2f7;
+        border-radius: 12px;
+        background: #ffffff;
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        overflow: hidden;
+    }
+    .hakuda-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 30px rgba(15, 23, 42, 0.1) !important;
+        border-color: #cbd5e1;
+    }
+    .hakuda-card .img-box {
+        position: relative;
+        height: 240px;
+        background-color: #f1f5f9;
+        overflow: hidden;
+    }
+    .hakuda-card .img-box img {
+        object-fit: contain;
+        padding: 12px;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.4s ease;
+    }
+    .hakuda-card:hover .img-box img {
+        transform: scale(1.08);
+    }
+    .hakuda-card .badge-grade {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: var(--hakuda-dark);
+        color: #ffffff;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 6px;
+        letter-spacing: 0.5px;
+    }
+    .hakuda-card .badge-status {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 4px 8px;
+        border-radius: 6px;
+    }
+
+    /* Feature Service Box */
+    .service-box {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        border: 1px solid #f1f5f9;
+        transition: all 0.2s ease;
+    }
+    .service-box:hover {
+        border-color: var(--hakuda-blue);
+        box-shadow: 0 8px 16px rgba(2, 132, 199, 0.08);
+    }
+</style>
+
+<!-- 1. HERO SLIDER BANNER (HAKUDA BANNER) -->
+<div id="heroCarousel" class="carousel slide hero-carousel mb-5" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active" style="background-image: url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=1600');">
+            <div class="hero-overlay">
+                <div class="container text-white">
+                    <div class="col-lg-6">
+                        <span class="badge bg-danger mb-3 px-3 py-2 fs-6 fw-bold text-uppercase">NEW ARRIVALS 2026</span>
+                        <h1 class="display-4 fw-extrabold text-white mb-3">GUNDAM PERFECT GRADE UNLEASHED</h1>
+                        <p class="lead text-light mb-4">Đỉnh cao công nghệ đúc Gunpla từ Bandai. Khám phá chi tiết khung xương cơ khí siêu thực ngay hôm nay.</p>
+                        <a href="/Product" class="btn btn-danger btn-lg fw-bold px-4 rounded-3 me-2">
+                            <i class="bi bi-bag-fill me-2"></i>MUA NGAY NOW
+                        </a>
+                        <a href="/Product" class="btn btn-outline-light btn-lg fw-bold px-4 rounded-3">
+                            Xem Bộ Sưu Tập
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1600');">
+            <div class="hero-overlay">
+                <div class="container text-white">
+                    <div class="col-lg-6">
+                        <span class="badge bg-primary mb-3 px-3 py-2 fs-6 fw-bold text-uppercase">PRE-ORDER HOT</span>
+                        <h1 class="display-4 fw-extrabold text-white mb-3">METAL BUILD & HIGH GRADE</h1>
+                        <p class="lead text-light mb-4">Đặt trước ngay các mẫu độc quyền giới hạn với giá ưu đãi cực hấp dẫn dành cho Fan Hobby.</p>
+                        <a href="/Product" class="btn btn-primary btn-lg fw-bold px-4 rounded-3">
+                            <i class="bi bi-clock-history me-2"></i>ĐẶT HÀNG PRE-ORDER
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+<div class="container">
+    <!-- 2. CAM KẾT DỊCH VỤ DẠNG HAKUDA BAR -->
+    <div class="row g-3 mb-5">
+        <div class="col-md-3 col-6">
+            <div class="service-box d-flex align-items-center">
+                <i class="bi bi-shield-check text-danger fs-1 me-3"></i>
+                <div>
+                    <h6 class="fw-bold mb-0 text-dark">100% Chính Hãng</h6>
+                    <small class="text-muted">Nhập trực tiếp Bandai JP</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="service-box d-flex align-items-center">
+                <i class="bi bi-box-seam text-primary fs-1 me-3"></i>
+                <div>
+                    <h6 class="fw-bold mb-0 text-dark">Đóng Gói Chống Móp</h6>
+                    <small class="text-muted">Bảo vệ hộp Collector 100%</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="service-box d-flex align-items-center">
+                <i class="bi bi-truck text-success fs-1 me-3"></i>
+                <div>
+                    <h6 class="fw-bold mb-0 text-dark">Giao Hàng Siêu Tốc</h6>
+                    <small class="text-muted">Nội thành nhận ngay 2h</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="service-box d-flex align-items-center">
+                <i class="bi bi-stars text-warning fs-1 me-3"></i>
+                <div>
+                    <h6 class="fw-bold mb-0 text-dark">Tích Điểm Thành Viên</h6>
+                    <small class="text-muted">Giảm giá cho đơn tiếp theo</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. DANH MỤC DÒNG SẢN PHẨM (GRADE PILLS) -->
+    <div class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="fw-bold text-dark mb-0">
+                <i class="bi bi-collection-fill text-danger me-2"></i>Dòng Mô Hình Gunpla
+            </h4>
+            <a href="/Product" class="text-decoration-none fw-bold text-primary small">Xem tất cả dòng <i class="bi bi-chevron-right"></i></a>
+        </div>
+
+        <div class="row g-3">
+            @if (categories != null && categories.Any())
+            {
+                @foreach (var cat in categories)
+                {
+                    <div class="col-lg-2 col-md-3 col-6">
+                        <a href="/Product?categoryId=@cat.CategoryId" class="text-decoration-none">
+                            <div class="category-badge-item p-3 text-center shadow-sm">
+                                <div class="fw-extrabold text-dark fs-5 mb-1">@cat.CategoryName</div>
+                                <span class="badge bg-light text-secondary rounded-pill fw-bold border">BANDAI</span>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <!-- 4. KHỐI SẢN PHẨM NỔI BẬT (FEATURED / HOT DROPS) -->
+    @if (featuredProducts != null && featuredProducts.Any())
+    {
+        <div class="mb-5">
+            <div class="p-4 rounded-3 shadow-sm text-white mb-4" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="badge bg-danger mb-1 fw-bold">MUST HAVE</span>
+                        <h3 class="fw-extrabold text-warning mb-0">🔥 SẢN PHẨM HOT BÁN CHẠY</h3>
+                    </div>
+                    <a href="/Product" class="btn btn-outline-light btn-sm fw-bold px-3">Khám phá ngay</a>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                @foreach (var item in featuredProducts)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="hakuda-card h-100 d-flex flex-column">
+                            <div class="img-box">
+                                <span class="badge-grade">@(item.Category?.CategoryName ?? "GUNPLA")</span>
+                                <span class="badge-status bg-danger text-white">HOT ITEM</span>
+                                <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "/images/no-image.png" : item.ImageUrl)" alt="@item.ProductName" />
+                            </div>
+                            <div class="p-3 d-flex flex-column flex-grow-1">
+                                <h6 class="fw-bold text-dark text-truncate mb-2" title="@item.ProductName">@item.ProductName</h6>
+                                <div class="mt-auto">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="fs-5 fw-extrabold text-danger">@item.Price.ToString("N0") đ</span>
+                                        <small class="text-muted text-decoration-line-through">@((item.Price * 1.1m).ToString("N0")) đ</small>
+                                    </div>
+                                    <a href="/Product/Details/@item.ProductId" class="btn btn-outline-dark fw-bold w-100 rounded-2 btn-sm">
+                                        <i class="bi bi-cart-plus me-1"></i>Xem Chi Tiết
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    <!-- 5. DANH SÁCH SẢN PHẨM MỚI VỀ (NEW ARRIVALS) -->
+    <div class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h3 class="fw-bold text-dark mb-1">
+                    <i class="bi bi-box2-heart-fill text-primary me-2"></i>Mô Hình Mới Cập Bến (New Arrivals)
+                </h3>
+                <p class="text-muted small mb-0">Cập nhật liên tục các mẫu Gunpla Bandai mới phát hành</p>
+            </div>
+            <a href="/Product" class="btn btn-primary fw-bold btn-sm px-3 rounded-2">
+                Xem Tất Cả (@(newArrivals?.Count ?? 0))
+            </a>
+        </div>
+
+        <div class="row g-4">
+            @if (newArrivals != null && newArrivals.Any())
+            {
+                @foreach (var item in newArrivals)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="hakuda-card h-100 d-flex flex-column">
+                            <div class="img-box">
+                                <span class="badge-grade">@(item.Category?.CategoryName ?? "HG 1/144")</span>
+                                <span class="badge-status bg-success text-white">CÓ SẴN</span>
+                                <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "/images/no-image.png" : item.ImageUrl)" alt="@item.ProductName" />
+                            </div>
+                            <div class="p-3 d-flex flex-column flex-grow-1">
+                                <h6 class="fw-bold text-dark text-truncate mb-2" title="@item.ProductName">@item.ProductName</h6>
+                                <div class="mt-auto">
+                                    <div class="fs-5 fw-extrabold text-danger mb-3">
+                                        @item.Price.ToString("N0") VNĐ
+                                    </div>
+                                    <div class="d-grid gap-2">
+                                        <a href="/Product/Details/@item.ProductId" class="btn btn-dark fw-bold btn-sm">
+                                            Xem Chi Tiết
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center py-5">
+                    <div class="bg-white p-5 rounded-3 border">
+                        <i class="bi bi-inbox fs-1 text-muted d-block mb-2"></i>
+                        <p class="text-muted mb-0">Đang cập nhật danh sách sản phẩm...</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- 6. BANNER KHUYẾN MÃI TẬP TRUNG (HOBBY BANNER) -->
+    <div class="p-5 rounded-3 mb-5 text-white position-relative overflow-hidden shadow" style="background: linear-gradient(135deg, #e63946 0%, #b91c1c 100%);">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <span class="badge bg-white text-danger fw-bold mb-2 px-3 py-2">GÓC HOBBY BUILDER</span>
+                <h2 class="fw-extrabold display-6 mb-3">BẠN LÀ NGHỆ NHÂN DỤNG CỤ & SƠN MODEL?</h2>
+                <p class="lead mb-4">Khám phá ngay đầy đủ kìm cắt GodHand, nhíp gắp, bút kẻ chìm Gundam Marker và sơn Mr.Hobby chuyên dụng tại HTT Gundam.</p>
+                <a href="/Product" class="btn btn-dark btn-lg fw-bold px-4 rounded-3">Sắm Dụng Cụ Ngay</a>
+            </div>
+            <div class="col-lg-4 text-center d-none d-lg-block">
+                <i class="bi bi-tools text-white" style="font-size: 8rem; opacity: 0.3;"></i>
+            </div>
+        </div>
+    </div>
+</div>

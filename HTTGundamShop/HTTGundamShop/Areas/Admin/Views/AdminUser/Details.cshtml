@@ -1,0 +1,99 @@
+﻿@model HTTGundamShop.Models.User
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Chi Tiết Tài Khoản - " + Model?.UserName;
+}
+
+<div class="container-fluid px-0">
+    <!-- Top Bar -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold text-dark mb-1">Chi Tiết Tài Khoản #@Model.UserId</h3>
+            <span class="text-muted small">Thông tin cá nhân và lịch sử đặt hàng</span>
+        </div>
+        <a href="/Admin/AdminUser" class="btn btn-outline-secondary fw-bold px-3">
+            <i class="bi bi-arrow-left me-1"></i> Quay lại danh sách
+        </a>
+    </div>
+
+    <div class="row g-4">
+        <!-- Cột trái: Thông tin cá nhân -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-header bg-dark text-white fw-bold py-3">
+                    <i class="bi bi-person-badge me-2"></i>Thông Tin Cá Nhân
+                </div>
+                <div class="card-body text-center py-4">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold mx-auto mb-3 fs-2" style="width: 80px; height: 80px;">
+                        @(string.IsNullOrEmpty(Model.UserName) ? "U" : Model.UserName.Substring(0, 1).ToUpper())
+                    </div>
+                    <h5 class="fw-bold text-dark mb-1">@Model.UserName</h5>
+                    <p class="text-muted small mb-3">@(Model.Email ?? "Chưa cập nhật email")</p>
+
+                    <hr />
+
+                    <div class="text-start">
+                        <p class="mb-2"><strong>Mã tài khoản:</strong> #@Model.UserId</p>
+                        <p class="mb-0"><strong>Tổng số đơn hàng:</strong> <span class="badge bg-primary fs-6">@(Model.Orders?.Count ?? 0)</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cột phải: Lịch sử mua hàng -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-header bg-light fw-bold py-3">
+                    <i class="bi bi-clock-history me-2 text-primary"></i>Lịch Sử Đặt Hàng (@(Model.Orders?.Count ?? 0))
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table align-middle mb-0">
+                            <thead class="table-light border-bottom">
+                                <tr class="text-secondary small text-uppercase">
+                                    <th class="ps-4 py-3">Mã đơn</th>
+                                    <th class="py-3">Ngày đặt</th>
+                                    <th class="py-3">Tổng tiền</th>
+                                    <th class="py-3">Trạng thái</th>
+                                    <th class="py-3 text-center pe-4">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Orders != null && Model.Orders.Any())
+                                {
+                                    @foreach (var order in Model.Orders.OrderByDescending(o => o.OrderDate))
+                                    {
+                                        <tr>
+                                            <td class="ps-4 py-3 fw-bold text-primary">#@order.OrderId</td>
+                                            <td class="py-3 text-muted">
+                                                @(order.OrderDate.HasValue ? order.OrderDate.Value.ToString("dd/MM/yyyy HH:mm") : "N/A")
+                                            </td>
+                                            <td class="py-3 text-danger fw-bold">
+                                                @order.TotalAmount.ToString("N0") VNĐ
+                                            </td>
+                                            <td class="py-3">
+                                                <span class="badge bg-secondary fw-bold px-2 py-1">@order.OrderStatus</span>
+                                            </td>
+                                            <td class="text-center pe-4 py-3">
+                                                <a href="/Admin/AdminOrder/Details/@order.OrderId" class="btn btn-sm btn-outline-primary fw-bold">
+                                                    Xem đơn
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="5" class="text-center py-4 text-muted">Người dùng này chưa đặt đơn hàng nào.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

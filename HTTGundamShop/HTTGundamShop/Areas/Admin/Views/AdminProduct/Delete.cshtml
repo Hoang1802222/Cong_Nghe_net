@@ -1,0 +1,58 @@
+﻿@model HTTGundamShop.Models.Product
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml"; // 👈 Đã trỏ đúng đường dẫn Layout Admin
+    ViewData["Title"] = "Xóa Sản Phẩm";
+}
+
+<div class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0 fw-bold"><i class="bi bi-exclamation-triangle-fill me-2"></i> Xác Nhận Xóa Sản Phẩm</h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-warning fw-bold" role="alert">
+                        <i class="bi bi-info-circle me-1"></i> Bạn có chắc chắn muốn xóa mô hình Gundam này khỏi hệ thống không? Thao tác này không thể hoàn tác!
+                    </div>
+
+                    <div class="row align-items-center mb-4">
+                        <div class="col-md-4 text-center">
+                            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                            {
+                                <img src="@Model.ImageUrl" alt="@Model.ProductName" class="img-thumbnail rounded shadow-sm" style="max-height: 150px; object-fit: cover;" />
+                            }
+                            else
+                            {
+                                <div class="bg-light rounded border d-flex align-items-center justify-content-center text-muted mx-auto" style="width: 120px; height: 120px;">
+                                    <i class="bi bi-image fs-1"></i>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="fw-bold text-dark">@Model.ProductName</h5>
+                            <p class="text-muted mb-1">Mã sản phẩm: <strong>#@Model.ProductId</strong></p>
+                            <p class="text-danger fw-bold fs-5 mb-2">Giá bán: @Model.Price.ToString("N0") VNĐ</p>
+                            <p class="text-secondary small mb-0">@(string.IsNullOrEmpty(Model.Description) ? "Chưa có mô tả" : Model.Description)</p>
+                        </div>
+                    </div>
+
+                    <!-- Form xác nhận xóa -->
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" asp-for="ProductId" />
+                        
+                        <div class="d-flex justify-content-between pt-3 border-top">
+                            <a asp-action="Index" class="btn btn-secondary fw-bold px-4">
+                                <i class="bi bi-arrow-left me-1"></i> Hủy & Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-danger fw-bold px-4">
+                                <i class="bi bi-trash me-1"></i> Xác Nhận Xóa
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

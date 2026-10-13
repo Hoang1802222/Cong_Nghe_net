@@ -1,0 +1,48 @@
+﻿@model HTTGundamShop.Models.Category
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Xóa Danh Mục";
+}
+
+<div class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-header bg-danger text-white fw-bold py-3">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>Xác Nhận Xóa Danh Mục
+                </div>
+                <div class="card-body p-4">
+                    @if (Model.Products != null && Model.Products.Any())
+                    {
+                        <div class="alert alert-warning fw-bold mb-3">
+                            <i class="bi bi-exclamation-circle me-1"></i>Danh mục này đang có <strong>@Model.Products.Count</strong> sản phẩm. Bạn không thể xóa danh mục này cho đến khi di chuyển các sản phẩm sang danh mục khác!
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-dark fw-bold mb-3">
+                            Bạn có chắc chắn muốn xóa danh mục này không?
+                        </p>
+                    }
+
+                    <div class="bg-light p-3 rounded mb-4 border">
+                        <p class="mb-1"><strong>Mã danh mục:</strong> #@Model.CategoryId</p>
+                        <p class="mb-0"><strong>Tên danh mục:</strong> @Model.CategoryName</p>
+                    </div>
+
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" asp-for="CategoryId" />
+                        <div class="d-flex justify-content-between">
+                            <a href="/Admin/AdminCategory" class="btn btn-secondary fw-bold px-4">Quay lại</a>
+                            @if (Model.Products == null || !Model.Products.Any())
+                            {
+                                <button type="submit" class="btn btn-danger fw-bold px-4">Xác Nhận Xóa</button>
+                            }
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

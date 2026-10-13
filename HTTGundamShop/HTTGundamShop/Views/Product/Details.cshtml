@@ -1,0 +1,108 @@
+﻿@model HTTGundamShop.Models.Product
+
+@{
+    ViewData["Title"] = Model.ProductName;
+    var relatedProducts = ViewBag.RelatedProducts as List<HTTGundamShop.Models.Product>;
+}
+
+<div class="container my-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/Product" class="text-decoration-none">Sản phẩm</a></li>
+            <li class="breadcrumb-item active">@Model.ProductName</li>
+        </ol>
+    </nav>
+
+    <!-- Khối Chi tiết sản phẩm -->
+    <div class="card border-0 shadow-sm rounded-3 p-4 bg-white mb-5">
+        <div class="row g-4">
+            <!-- Cột trái: Ảnh sản phẩm -->
+            <div class="col-md-5">
+                <div class="rounded overflow-hidden border bg-light text-center p-2" style="max-height: 400px;">
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <img src="@Model.ImageUrl" class="img-fluid rounded object-fit-contain" style="max-height: 380px;" alt="@Model.ProductName" />
+                    }
+                    else
+                    {
+                        <div class="d-flex align-items-center justify-content-center py-5 text-muted">
+                            <i class="bi bi-image fs-1"></i>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Cột phải: Thông tin & Thêm vào giỏ -->
+            <div class="col-md-7 d-flex flex-column">
+                <span class="badge bg-primary text-uppercase fw-bold align-self-start mb-2 px-3 py-2">
+                    Dòng: @(Model.Category?.CategoryName ?? "Mô hình Gundam")
+                </span>
+
+                <h2 class="fw-bold text-dark mb-3">@Model.ProductName</h2>
+
+                <div class="fs-2 fw-bold text-danger mb-4">
+                    @Model.Price.ToString("N0") VNĐ
+                </div>
+
+                <div class="mb-4">
+                    <h6 class="fw-bold text-secondary text-uppercase small">Mô tả sản phẩm:</h6>
+                    <p class="text-muted leading-relaxed">
+                        @(string.IsNullOrEmpty(Model.Description) ? "Mô hình Gundam Bandai chính hãng từ Nhật Bản, độ chi tiết cao, khớp linh hoạt thích hợp cho việc sưu tầm và trưng bày." : Model.Description)
+                    </p>
+                </div>
+
+                <hr class="mt-auto my-3" />
+
+                <!-- Form Thêm vào giỏ hàng -->
+                <form action="/Cart/AddToCart" method="post" class="d-flex align-items-center gap-3">
+                    <input type="hidden" name="productId" value="@Model.ProductId" />
+
+                    <div style="width: 120px;">
+                        <label class="form-label small fw-bold text-muted mb-1">Số lượng:</label>
+                        <input type="number" name="quantity" class="form-control text-center fw-bold" value="1" min="1" max="99" />
+                    </div>
+
+                    <div class="flex-grow-1 align-self-end">
+                        <button type="submit" class="btn btn-warning btn-lg fw-bold w-100 shadow-sm py-2">
+                            <i class="bi bi-cart-plus me-2"></i>Thêm Vào Giỏ Hàng
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Khối Sản phẩm liên quan -->
+    @if (relatedProducts != null && relatedProducts.Any())
+    {
+        <div class="mt-5">
+            <h4 class="fw-bold text-dark mb-4">
+                <i class="bi bi-grid-fill text-primary me-2"></i>Mô Hình Cùng Dòng Cần Tham Khảo
+            </h4>
+            <div class="row g-3">
+                @foreach (var rel in relatedProducts)
+                {
+                    <div class="col-md-3 col-6">
+                        <div class="card h-100 border-0 shadow-sm rounded-3 card-product">
+                            <div class="position-relative overflow-hidden rounded-top" style="height: 180px; background-color: #f8f9fa;">
+                                @if (!string.IsNullOrEmpty(rel.ImageUrl))
+                                {
+                                    <img src="@rel.ImageUrl" class="card-img-top w-100 h-100 object-fit-cover" alt="@rel.ProductName" />
+                                }
+                            </div>
+                            <div class="card-body p-3 d-flex flex-column">
+                                <h6 class="card-title fw-bold text-dark text-truncate mb-2">@rel.ProductName</h6>
+                                <div class="mt-auto">
+                                    <div class="fw-bold text-danger mb-2">@rel.Price.ToString("N0") VNĐ</div>
+                                    <a href="/Product/Details/@rel.ProductId" class="btn btn-sm btn-outline-primary fw-bold w-100">Xem ngay</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
