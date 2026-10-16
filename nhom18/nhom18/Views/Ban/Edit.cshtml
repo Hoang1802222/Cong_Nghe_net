@@ -1,0 +1,45 @@
+﻿@model nhom18.Models.Ban
+
+@{
+    ViewData["Title"] = "Cập nhật bàn";
+}
+
+<div class="container mt-4" style="max-width: 600px;">
+    <h2>Cập nhật thông tin bàn</h2>
+    <hr />
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="MaBan" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="mb-3">
+            <label asp-for="TenBan" class="form-label">Tên bàn</label>
+            <input asp-for="TenBan" class="form-control" />
+            <span asp-validation-for="TenBan" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="KhuVuc" class="form-label">Khu vực</label>
+            <input asp-for="KhuVuc" class="form-control" />
+            <span asp-validation-for="KhuVuc" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SoGhe" class="form-label">Số ghế</label>
+            <input asp-for="SoGhe" class="form-control" type="number" />
+            <span asp-validation-for="SoGhe" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="TrangThai" class="form-label">Trạng thái</label>
+            <select asp-for="TrangThai" class="form-select">
+                <option value="Trống">Trống</option>
+                <option value="Đang phục vụ">Đang phục vụ</option>
+                <option value="Đã đặt">Đã đặt</option>
+            </select>
+            <span asp-validation-for="TrangThai" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    </form>
+</div>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<nhom18.Models.Order>
+
+@{
+    ViewData["Title"] = "Quản lý Hóa đơn & Order";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Lịch sử & Quản lý Hóa đơn</h2>
+        <a asp-controller="Ban" asp-action="Index" class="btn btn-primary">&larr; Quay lại sơ đồ bàn</a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    <table class="table table-bordered table-striped align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Mã Order</th>
+                <th>Bàn</th>
+                <th>Loại Order</th>
+                <th>Giờ vào</th>
+                <th>Giờ thanh toán</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+                <th>Chi tiết món</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                string badgeClass = item.TrangThai == "Đã thanh toán" ? "bg-success" : "bg-warning text-dark";
+
+                <tr>
+                    <td><strong>#@item.MaOrder</strong></td>
+                    <td>@(item.MaBanNavigation != null ? item.MaBanNavigation.TenBan : "Mang về / Khác")</td>
+                    <td>@item.LoaiOrder</td>
+                    <td>@item.GioVao.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@(item.GioThanhToan.HasValue ? item.GioThanhToan.Value.ToString("dd/MM/yyyy HH:mm") : "Chưa thanh toán")</td>
+                    <td class="text-danger fw-bold">@item.TongTien.ToString("N0") đ</td>
+                    <td>
+                        <span class="badge @badgeClass">@item.TrangThai</span>
+                    </td>
+                    <td>
+                        @if (item.ChiTietOrders != null && item.ChiTietOrders.Any())
+                        {
+                            <ul class="mb-0 ps-3">
+                                @foreach (var ct in item.ChiTietOrders)
+                                {
+                                    <li>
+                                        @ct.MaMonNavigation.TenMon (x@ct.SoLuong)
+                                        @if (!string.IsNullOrEmpty(ct.GhiChu))
+                                        {
+                                            <small class="text-muted">(@ct.GhiChu)</small>
+                                        }
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Chưa có món</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

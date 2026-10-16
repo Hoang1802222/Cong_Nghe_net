@@ -1,0 +1,68 @@
+﻿@model IEnumerable<nhom18.Models.Mon>
+
+@{
+    ViewData["Title"] = "Thực đơn quán Cafe";
+    Layout = "_ClientLayout"; // Sử dụng Layout riêng cho Khách hàng, thoát khỏi AdminLTE
+    var danhMucs = ViewBag.DanhMucs as List<nhom18.Models.DanhMucMon>;
+    int? selectedDm = ViewBag.SelectedDanhMuc as int?;
+}
+
+<div class="container">
+    <div class="text-center mb-4">
+        <h1 class="fw-bold text-warning">☕ THỰC ĐƠN QUÁN CAFE</h1>
+        <p class="text-muted">Thưởng thức hương vị tuyệt vời cùng không gian ấm cúng</p>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success text-center">@TempData["Success"]</div>
+    }
+
+    <!-- Thanh lọc theo danh mục -->
+    <div class="d-flex justify-content-center mb-4 gap-2 flex-wrap">
+        <a asp-action="Menu" class="btn @(!selectedDm.HasValue ? "btn-dark" : "btn-outline-dark")">Tất cả món</a>
+        @if (danhMucs != null)
+        {
+            foreach (var dm in danhMucs)
+            {
+                bool isSelected = selectedDm.HasValue && selectedDm.Value == dm.MaDm;
+                <a asp-action="Menu" asp-route-maDm="@dm.MaDm" class="btn @(isSelected ? "btn-dark" : "btn-outline-dark")">
+                    @dm.TenDm
+                </a>
+            }
+        }
+    </div>
+
+    <!-- Danh sách món ăn -->
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var mon in Model)
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        @if (!string.IsNullOrEmpty(mon.AnhMon))
+                        {
+                            <img src="@mon.AnhMon" class="card-img-top" style="height: 180px; object-fit: cover;" alt="@mon.TenMon" />
+                        }
+                        else
+                        {
+                            <div class="bg-secondary text-white text-center d-flex align-items-center justify-content-center" style="height: 180px;">Không có ảnh</div>
+                        }
+                        <div class="card-body d-flex flex-column text-center">
+                            <h5 class="card-title fw-bold">@mon.TenMon</h5>
+                            <p class="text-danger fw-bold fs-5 mb-3">@mon.GiaBan.ToString("N0") đ</p>
+                            <span class="badge bg-light text-dark border mt-auto">Còn hàng</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center py-5">
+                <p class="text-muted fs-5">Không có món ăn nào trong danh mục này.</p>
+            </div>
+        }
+    </div>
+</div>

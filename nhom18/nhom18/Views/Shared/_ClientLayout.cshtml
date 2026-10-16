@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Nhóm 18 Cafe</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #f8f9fa; }
+        .client-navbar { background-color: #212529; }
+    </style>
+</head>
+<body>
+    <!-- Topbar đơn giản cho Khách hàng -->
+    <nav class="navbar navbar-expand-lg navbar-dark client-navbar shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning fs-4" asp-controller="Client" asp-action="Menu">
+                ☕ NHÓM 18 CAFE
+            </a>
+            <div class="d-flex gap-2">
+                <a asp-controller="Client" asp-action="Menu" class="btn btn-outline-light"><i class="fas fa-utensils me-1"></i> Thực đơn</a>
+                <a asp-controller="Client" asp-action="DatBan" class="btn btn-warning fw-bold"><i class="fas fa-calendar-alt me-1"></i> Đặt bàn</a>
+                <a asp-controller="Ban" asp-action="Index" class="btn btn-outline-secondary btn-sm text-white border-light" title="Khu vực Quản trị">
+        <i class="fas fa-lock me-1"></i> Quản trị
+    </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content chính -->
+    <main class="py-4">
+        @RenderBody()
+    </main>
+
+    <footer class="bg-dark text-white-50 text-center py-3 mt-5">
+        <div class="container">
+            <small>&copy; @DateTime.Now.Year Nhóm 18 Cafe - Rất hân hạnh được phục vụ quý khách!</small>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

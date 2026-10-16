@@ -1,0 +1,48 @@
+﻿@model IEnumerable<nhom18.Models.DanhMucMon>
+
+@{
+    ViewData["Title"] = "Quản lý Danh mục Món";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Quản lý Danh mục Món Ăn</h2>
+        <a asp-action="Create" class="btn btn-primary">+ Thêm danh mục mới</a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Mã DM</th>
+                <th>Tên danh mục</th>
+                <th>Thứ tự hiển thị</th>
+                <th class="text-center">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MaDm</td>
+                    <td><strong>@item.TenDm</strong></td>
+                    <td>@item.ThuTu</td>
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-route-id="@item.MaDm" class="btn btn-warning btn-sm">Sửa</a>
+                        <form asp-action="Delete" asp-route-id="@item.MaDm" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?');">
+                            <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

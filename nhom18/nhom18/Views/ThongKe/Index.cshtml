@@ -1,0 +1,153 @@
+﻿@model IEnumerable<nhom18.Models.Order>
+
+@{
+    ViewData["Title"] = "Thống kê Doanh thu";
+    var topMonBanChay = ViewBag.MonBanChay as List<nhom18.Controllers.MonBanChayViewModel>;
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Báo cáo & Thống kê Doanh thu</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-controller="Ban" asp-action="Index">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Thống kê</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <!-- Form lọc theo khoảng thời gian -->
+    <div class="card card-outline card-primary mb-4">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-filter mr-1"></i> Bộ lọc thời gian</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="Index" method="get" class="row">
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Từ ngày:</label>
+                    <input type="date" name="tuNgay" value="@ViewBag.TuNgay" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Đến ngày:</label>
+                    <input type="date" name="denNgay" value="@ViewBag.DenNgay" class="form-control" />
+                </div>
+                <div class="col-md-4 d-flex align-items-end mt-3 mt-md-0">
+                    <button type="submit" class="btn btn-primary btn-block fw-bold"><i class="fas fa-search mr-1"></i> Lọc dữ liệu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Small Boxes (Stat box chuẩn AdminLTE) -->
+    <div class="row">
+        <div class="col-lg-6 col-6">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>@(((decimal)ViewBag.TongDoanhThu).ToString("N0")) <sup style="font-size: 20px">VNĐ</sup></h3>
+                    <p>Tổng Doanh Thu</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-6">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>@ViewBag.TongSoHoaDon</h3>
+                    <p>Hóa Đơn Đã Thanh Toán</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-receipt"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Bảng Top Món Bán Chạy -->
+        <div class="col-md-5">
+            <div class="card card-dark">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-fire mr-1"></i> Top 5 Món Bán Chạy Nhất</h3>
+                </div>
+                <div class="card-body p-0">
+                    @if (topMonBanChay != null && topMonBanChay.Any())
+                    {
+                        <table class="table table-striped align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Tên món</th>
+                                    <th>Số lượng</th>
+                                    <th>Doanh thu</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var m in topMonBanChay)
+                                {
+                                    <tr>
+                                        <td class="fw-bold">@m.TenMon</td>
+                                        <td><span class="badge bg-primary">@m.SoLuongBan</span></td>
+                                        <td class="text-danger fw-bold">@m.DoanhThuMon.ToString("N0") đ</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center p-3 mb-0">Chưa có dữ liệu bán hàng trong khoảng thời gian này.</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Bảng Chi Tiết Hóa Đơn -->
+        <div class="col-md-7">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-list-alt mr-1"></i> Chi tiết Hóa đơn đã thanh toán</h3>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-bordered table-striped align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Mã Order</th>
+                                <th>Bàn</th>
+                                <th>Giờ thanh toán</th>
+                                <th>Tổng tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td><strong>#@item.MaOrder</strong></td>
+                                        <td>@(item.MaBanNavigation != null ? item.MaBanNavigation.TenBan : "Mang về")</td>
+                                        <td>@(item.GioThanhToan.HasValue ? item.GioThanhToan.Value.ToString("dd/MM/yyyy HH:mm") : "-")</td>
+                                        <td class="text-danger fw-bold">@item.TongTien.ToString("N0") đ</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="4" class="text-center text-muted p-3">Không có hóa đơn nào.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

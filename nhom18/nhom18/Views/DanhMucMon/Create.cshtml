@@ -1,0 +1,28 @@
+﻿@model nhom18.Models.DanhMucMon
+
+@{
+    ViewData["Title"] = "Thêm danh mục mới";
+}
+
+<div class="container mt-4" style="max-width: 600px;">
+    <h2>Thêm danh mục món ăn mới</h2>
+    <hr />
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
+        <div class="mb-3">
+            <label asp-for="TenDm" class="form-label">Tên danh mục</label>
+            <input asp-for="TenDm" class="form-control" placeholder="Ví dụ: Cà phê, Trà sữa..." />
+            <span asp-validation-for="TenDm" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ThuTu" class="form-label">Thứ tự hiển thị</label>
+            <input asp-for="ThuTu" class="form-control" type="number" value="1" />
+            <span asp-validation-for="ThuTu" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Lưu lại</button>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    </form>
+</div>

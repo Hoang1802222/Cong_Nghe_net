@@ -1,0 +1,77 @@
+﻿@model IEnumerable<nhom18.Models.Ban>
+
+@{
+    ViewData["Title"] = "Quản lý Bàn ăn";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Quản lý Sơ đồ Bàn</h2>
+        <a asp-action="Create" class="btn btn-primary">+ Thêm bàn mới</a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <!-- Form tìm kiếm và lọc khu vực -->
+    <form asp-action="Index" method="get" class="row g-3 mb-4">
+        <div class="col-md-4">
+            <input type="text" name="searchString" value="@ViewBag.CurrentSearch" class="form-control" placeholder="Nhập tên bàn cần tìm..." />
+        </div>
+        <div class="col-md-3">
+            <select name="khuVuc" class="form-select">
+                <option value="">-- Tất cả khu vực --</option>
+                @if (ViewBag.DanhSachKhuVuc != null)
+                {
+                    foreach (var kv in ViewBag.DanhSachKhuVuc)
+                    {
+                        if (ViewBag.CurrentKhuVuc == kv)
+                        {
+                            <option value="@kv" selected="selected">@kv</option>
+                        }
+                        else
+                        {
+                            <option value="@kv">@kv</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-secondary">Lọc / Tìm kiếm</button>
+            <a asp-action="Index" class="btn btn-outline-dark">Làm mới</a>
+        </div>
+    </form>
+
+    <!-- Bảng danh sách bàn -->
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            string badgeColor = item.TrangThai == "Trống" ? "bg-success" : (item.TrangThai == "Đang phục vụ" ? "bg-danger" : "bg-warning text-dark");
+            
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold">@item.TenBan</h5>
+                        <p class="text-muted mb-1">Khu vực: @item.KhuVuc</p>
+                        <p class="mb-2">Số ghế: <strong>@item.SoGhe</strong></p>
+                        <span class="badge @badgeColor mb-3">@item.TrangThai</span>
+                        
+                        <div class="d-flex justify-content-center gap-2">
+                            <a asp-action="Edit" asp-route-id="@item.MaBan" class="btn btn-warning btn-sm">Sửa</a>
+                            <form asp-action="Delete" asp-route-id="@item.MaBan" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa bàn này không?');">
+                                <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
